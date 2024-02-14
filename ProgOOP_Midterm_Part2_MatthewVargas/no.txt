@@ -1,0 +1,14 @@
+﻿
+Before I realized I was getting confused I was writing this down, I'll maybe use this later for inspiration instead
+
+  //Parent Class:
+  // -VR headset
+  // -Xbox
+  // -PC
+  // -PCVR (Valve index) <
+
+  //Derived Classes            
+  // -Rotation
+  // -Settings
+  // -Library of games
+  // -Controllers
