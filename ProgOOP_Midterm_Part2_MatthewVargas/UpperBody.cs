@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +18,6 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
         {
             _color = color;
             _name = name;
-
-
-
 
         }
     }
