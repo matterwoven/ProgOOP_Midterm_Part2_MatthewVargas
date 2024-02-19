@@ -6,29 +6,46 @@ using System.Threading.Tasks;
 
 namespace ProgOOP_Midterm_Part2_MatthewVargas
 {
-    internal class Person
+    internal class Commands
     {
-        OuterWear _outerWear;
-        InnerWear _innerWear;
-        
-        //Can be used as a preset
-        internal Person(UpperBody outerWear, UpperBody innerWear)
+        internal static void Shop()
         {
-            Person person = new Person(outerWear, innerWear);
-        }
-
-        internal static void SetIdentifiers() 
-        {
+            Closet.ListOfShopItems();
             
-
         }
-        internal void DisplayCurrentAttire()
+        internal static void Storage()
         {
-            Console.WriteLine($"Current Upper Body:\n" +
-                     $" (Inner Wear) - {this._outerWear.name}\n" +
-                     $" (Outer Wear) - {this._innerWear.name}\n");
+
+        }
+        /// <summary>
+        ///  Full disclosure, the majority of this is just for the program section not to bloat
+        /// </summary>
+        static void Store() 
+        {
+        
         }
 
+        internal static void MenuExploration() 
+        {
+            string userInput = Console.ReadLine();
 
+            switch (userInput)
+            {
+                case "1":
+                    Closet.CurrentConfiguration();
+                    break;
+                case "2":
+                    Closet.Wardrobe();
+                    break;
+                case "3":
+                    Commands.Shop();
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Please enter a valid option.");
+                    MenuExploration();
+                    break;
+            }
+
+        }
     }
 }
