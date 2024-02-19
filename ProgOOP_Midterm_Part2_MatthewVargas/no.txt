@@ -1,5 +1,5 @@
 ﻿
-Before I realized I was getting confused I was writing this down, I'll maybe use this later for inspiration instead
+I'll maybe use this later for inspiration, previous writing out ideas for project:
 
   //Parent Class:
   // -VR headset
