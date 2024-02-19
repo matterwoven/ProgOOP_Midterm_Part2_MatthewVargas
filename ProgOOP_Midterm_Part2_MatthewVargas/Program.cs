@@ -1,12 +1,10 @@
-﻿namespace ProgOOP_Midterm_Part2_MatthewVargas
+namespace ProgOOP_Midterm_Part2_MatthewVargas
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             Closet closet = new Closet();
-
-            Console.WriteLine("Hello, World!");
 
             //Classes Inheritance Static
 
@@ -43,16 +41,14 @@
             }
             else 
             { invalidname(); }
-            
-             
-            string userInput = Console.ReadLine();
 
-            Commands.MenuExploration();
+
+            string userInput = Console.ReadLine();
 
             switch (userInput)
             {
                 case "1":
-                    Commands.CurrentConfiguration();
+                    Closet.CurrentConfiguration();
                     break;
                 case "2":
                     Closet.Wardrobe();
@@ -60,9 +56,9 @@
                 case "3":
                     Commands.Shop();
                     break;
-                case "4":
-                    Commands.Storage();
-                    break;
+                //case "4":
+                //    Commands.Storage();
+                //    break;
                 default:
                     Console.WriteLine("Invalid input. Please enter a valid option.");
                     Commands.MenuExploration();
