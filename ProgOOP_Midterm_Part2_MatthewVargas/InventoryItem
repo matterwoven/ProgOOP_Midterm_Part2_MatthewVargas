@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProgOOP_Midterm_Part2_MatthewVargas
+{
+    internal class InventoryItem
+    {
+        UpperBody _clothingItem;
+
+        bool _owned;
+
+        public InventoryItem(UpperBody clothingItem, bool owned)
+        {
+            _clothingItem = clothingItem;
+            _owned = owned;
+        }
+
+        public UpperBody ClothingItem
+        {
+            get { return _clothingItem; }
+        }
+
+        public void  Buy()
+        {
+            _owned = true;
+        }
+
+        public void Sell()
+        {
+            _owned = false;
+        }
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"{_clothingItem.name} - {_clothingItem.color} - Is Owned: {_owned}");
+        }
+    }
+}
