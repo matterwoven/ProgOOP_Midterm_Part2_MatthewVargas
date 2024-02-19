@@ -65,7 +65,7 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
         }
 
 
-        public void turntoint() 
+        static void turntoint() 
         {
             string numberword = Console.ReadLine();
             int numbernum = int.Parse(numberword);
@@ -88,7 +88,7 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
         static OuterWear noneouter = new OuterWear("none", 0, "none");
         static InnerWear noneinner = new InnerWear("none", 0, "none");
 
-        public void EquipClothing()
+        static void EquipClothing()
         {
             Console.WriteLine($"Type the number corresponding to the item you want to equip");
             turntoint();
@@ -108,7 +108,7 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
             if (UpperBodyOwned[slotindex] is OuterWear)
             {
                 //Issue area, tempcurrentConfiguration (copy of currentConfiguration) doesn't fit into upperbody specifications
-                UpperBody tempholder = tempcurrentConfiguration[1];
+                UpperBody tempholder = tempcurrentConfiguration.GetType(Oute);
                 Person tempnewConfiguration = new Person(UpperBodyOwned[slotindex], tempholder);
                 
                 currentConfiguration = tempnewConfiguration;
@@ -119,7 +119,7 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
             else if (UpperBodyOwned[slotindex] is InnerWear)
             {
                 //Issue area, tempcurrentConfiguration (copy of current configuration) doesn't fit into the upperbody specifications
-                UpperBody tempholder = tempcurrentConfiguration[2];
+                UpperBody tempholder = tempcurrentConfiguration.GetType(InnerWear);
                 Person tempnewConfiguration = new Person(tempholder, UpperBodyOwned[slotindex]);
 
                 currentConfiguration = tempnewConfiguration;
@@ -130,14 +130,14 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
             }
 
         }
-        public void AskForRemoved() 
+        static void AskForRemoved() 
         {
             Console.WriteLine("(1) - Remove Outer clothing\n" +
             "(2) - Remove Inner clothing\n" +
             "(3) - Return to menu\n");
             Console.WriteLine("Which piece of clothing would you like to remove? (ex: 1, 2, 3)");
         }
-        public void RemoveClothing()
+        static void RemoveClothing()
         {
             AskForRemoved();
             turntoint();
@@ -153,10 +153,10 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
                 {
                     //Issue here, unsure of what would replace outer effectively for currentConfiguration
                     case 1:
-                        currentConfiguration[1] = noneouter;
+                        currentConfiguration.GetType(OuterWear) = noneouter;
                         break;
                     case 2:
-                        currentConfiguration[2] = noneinner;
+                        currentConfiguration.GetType(InnerWear) = noneinner;
                         break;
                     case 3:
                         Commands.MenuExploration();
