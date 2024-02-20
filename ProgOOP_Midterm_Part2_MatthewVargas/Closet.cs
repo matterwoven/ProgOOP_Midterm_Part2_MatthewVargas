@@ -26,7 +26,6 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
 
         static List<UpperBody> UpperBodyOwned = new List<UpperBody>();
         static List<UpperBody> UpperBodyUnowned = new List<UpperBody>();
-        static List<InventoryItem> inventoryItems = new List<InventoryItem>();
         //For shop and wardrobe
 
         private List<Person> Configurations = new List<Person>();
@@ -38,13 +37,8 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
             Tshirt tshirt = new Tshirt("Blue", 20.00, "Tshirt");
             Sweater sweater = new Sweater("Blue", 10.15, "Sweater");
 
-            inventoryItems.Add(new InventoryItem(tshirt, false));
-            inventoryItems.Add(new InventoryItem(sweater, true));
-
-            Person lisa = new Person(inventoryItems[0].ClothingItem, inventoryItems[1].ClothingItem);
-
-            //UpperBodyOwned.Add(tshirt);
-            //UpperBodyOwned.Add(sweater);
+            UpperBodyOwned.Add(tshirt);
+            UpperBodyOwned.Add(sweater);
 
             //--------------------------------
 
@@ -61,37 +55,46 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
 
             //--------------------------------
 
-            Person person = new Person(none, none);
+            Person person = new Person(noneouter, noneinner);
         }
 
-
-        static void turntoint() 
+        internal static void Startupvalues() 
+        {
+            nameofinnerwear = "none";
+            nameofouterwear = "none";        
+        }
+        static void Turntoint() 
         {
             string numberword = Console.ReadLine();
-            int numbernum = int.Parse(numberword);
-
-            if ( numbernum is < 0 || numbernum == null) 
-            {
-
+            if(int.TryParse(numberword, out int number))
+    {
+                if (number >= 0)
+                {
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Invalid selection. Please enter a non-negative number.");
+                    Turntoint();
+                }
             }
-            else 
+            else
             {
-                Console.WriteLine("Invalid selection, type in another number");
-                turntoint();
-            };
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Turntoint();
+            }
 
-            
-        
         }
         // Current Objective: Solve how to apply a selected piece of clothing to it's corresponding slot (context below commented in equip and unequip methods)
 
         static OuterWear noneouter = new OuterWear("none", 0, "none");
         static InnerWear noneinner = new InnerWear("none", 0, "none");
 
+        static string nameofouterwear;
+        static string nameofinnerwear;
         static void EquipClothing()
         {
             Console.WriteLine($"Type the number corresponding to the item you want to equip");
-            turntoint();
 
             string numberword = Console.ReadLine();
             int slotindex = int.Parse(numberword);
@@ -100,72 +103,65 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
             {
                 Console.Write("\nInvalid item");
                 return;
-            }    
-            
-            Person tempcurrentConfiguration = currentConfiguration;
-            
-
-            if (UpperBodyOwned[slotindex] is OuterWear)
+            }
+            else if (UpperBodyOwned.Count == 0) 
             {
-                //Issue area, tempcurrentConfiguration (copy of currentConfiguration) doesn't fit into upperbody specifications
-                UpperBody tempholder = tempcurrentConfiguration.GetType(Oute);
-                Person tempnewConfiguration = new Person(UpperBodyOwned[slotindex], tempholder);
-                
-                currentConfiguration = tempnewConfiguration;
-                Console.WriteLine($"Clothing equipped successfully to outer wear!\n");
-                //Issue area, tempcurrentConfiguration doesn't work
+                Console.Write("No items avaliable to equip. Sending to menu\n\n");
+                BasicTextNav();
+            }           
 
+            else if (UpperBodyOwned[slotindex] is OuterWear)
+            {
+                currentConfiguration.SetIdentifiersOuter(UpperBodyOwned[slotindex] as OuterWear);
+                string nameofouterwear = UpperBodyOwned[slotindex].name;
+                Console.WriteLine($"Clothing equipped successfully to outer wear!\n");
+                BasicTextNav();
             }
             else if (UpperBodyOwned[slotindex] is InnerWear)
             {
-                //Issue area, tempcurrentConfiguration (copy of current configuration) doesn't fit into the upperbody specifications
-                UpperBody tempholder = tempcurrentConfiguration.GetType(InnerWear);
-                Person tempnewConfiguration = new Person(tempholder, UpperBodyOwned[slotindex]);
-
-                currentConfiguration = tempnewConfiguration;
+                currentConfiguration.SetIdentifiersInner(UpperBodyOwned[slotindex] as InnerWear);
+                nameofinnerwear = UpperBodyOwned[slotindex].name;
                 Console.WriteLine($"Clothing equipped successfully to inner wear!\n");
-                //Issue area, tempcurrentConfiguration doesn't work
-
-
+                BasicTextNav();
             }
 
         }
+        
         static void AskForRemoved() 
         {
-            Console.WriteLine("(1) - Remove Outer clothing\n" +
+            Console.Write("(1) - Remove Outer clothing\n" +
             "(2) - Remove Inner clothing\n" +
             "(3) - Return to menu\n");
-            Console.WriteLine("Which piece of clothing would you like to remove? (ex: 1, 2, 3)");
+            Console.WriteLine("Which piece of clothing would you like to remove?\n");
         }
         static void RemoveClothing()
         {
             AskForRemoved();
-            turntoint();
+            Turntoint();
             string numberword = Console.ReadLine();
             int slotindex = int.Parse(numberword);
-
-
-            Person removedclothing = null;
 
             if (slotindex > 0)
             {
                 switch (slotindex)
                 {
-                    //Issue here, unsure of what would replace outer effectively for currentConfiguration
                     case 1:
-                        currentConfiguration.GetType(OuterWear) = noneouter;
+                        currentConfiguration.SetIdentifiersOuter(noneouter as OuterWear);
+                        Console.Write("Outer clothing removed\n");
+                        BasicTextNav();
                         break;
                     case 2:
-                        currentConfiguration.GetType(InnerWear) = noneinner;
+                        currentConfiguration.SetIdentifiersInner(noneinner as InnerWear);
+                        Console.Write("Inner clothing removed\n");
+                        BasicTextNav();
                         break;
                     case 3:
                         Commands.MenuExploration();
                         break;
                     default:
-                        Console.WriteLine("Invalid input. Please enter a valid option.");
+                        Console.Write("Invalid input. Please enter a valid option.\n\n");
                         RemoveClothing();
                         break;
-                    //Issue here, unsure of what would replace currentConfiguration to the effect I intend
                 }
             }
         }
@@ -193,9 +189,36 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
         }
         internal static void CurrentConfiguration()
         {
-            Console.Write("Current Configuration was called, placeholder for function annotated out");
-            //Console.Write($" (Outer Wear) - {currentConfiguration[1]}\n"); currenConfiguration is also broken here, annotated out for usability
-            //Console.Write($" (Inner Wear) - {currentConfiguration[2}}\n\n");
+            Console.Write("Current Configuration displaying below:\n");
+            Console.Write($" (Outer Wear) - {nameofouterwear}\n");
+            Console.Write($" (Inner Wear) - {nameofinnerwear}\n\n");
+
+            Console.Write("\n" +
+             "   (1) - Remove Clothing\n" +
+             "   (2) - Shop\n" +
+             "   (3) - Equip clothing\n");
+
+
+
+            string UserInput = Console.ReadLine();
+
+            switch (UserInput)
+            {
+                //Equip an item, remove an item, and search for an item
+                case "1":
+                    Closet.RemoveClothing();
+                    break;
+                case "2":
+                    Commands.Shop();
+                    break;
+                case "3":
+                    Closet.EquipClothing();
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Please enter a valid option.");
+                    Commands.MenuExploration();
+                    break;
+            }
         }
         internal static void WardrobeListOfItems()
         {
