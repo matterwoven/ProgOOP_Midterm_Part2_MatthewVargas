@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgOOP_Midterm_Part2_MatthewVargas
 {
+    //unused, here as inspiration to make potential changes
     internal class InventoryItem
     {
         UpperBody _clothingItem;
