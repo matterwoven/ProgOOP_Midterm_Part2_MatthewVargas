@@ -4,8 +4,10 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
     {
         static void Main(string[] args)
         {
-            Closet closet = new Closet();
+            Closet.Startupvalues();
 
+            Closet closet = new Closet();
+            
             //Classes Inheritance Static
 
             //While tracking rotations and other things through steam is good, that's a little out of scope for me right now.
@@ -64,8 +66,6 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
                     Commands.MenuExploration();
                     break;
             }
-
-
             static void invalidname()
             {
                 Console.WriteLine("Sorry, that's invalid. What is your name?\n");
