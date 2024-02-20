@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,5 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
         private double _cost = cost;
         public double cost { get => _cost; protected set => _cost = value; } }
            
-
     }
 
