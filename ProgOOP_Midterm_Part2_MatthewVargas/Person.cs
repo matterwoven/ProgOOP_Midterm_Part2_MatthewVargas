@@ -12,23 +12,20 @@ namespace ProgOOP_Midterm_Part2_MatthewVargas
         InnerWear _innerWear;
         
         //Can be used as a preset
-        internal Person(UpperBody outerWear, UpperBody innerWear)
+        internal Person(OuterWear outerWear, InnerWear innerWear)
         {
-            Person person = new Person(outerWear, innerWear);
+            //Person person = new Person(outerWear, innerWear);
+            _outerWear = outerWear;
+            _innerWear = innerWear;
         }
-
-        internal static void SetIdentifiers() 
+        public void SetIdentifiersOuter(OuterWear outerWear)
         {
-            
-
+            _outerWear = outerWear;    
         }
-        internal void DisplayCurrentAttire()
+        public void SetIdentifiersInner(InnerWear innerWear) 
         {
-            Console.WriteLine($"Current Upper Body:\n" +
-                     $" (Inner Wear) - {this._outerWear.name}\n" +
-                     $" (Outer Wear) - {this._innerWear.name}\n");
+            _innerWear = innerWear;
         }
-
 
     }
 }
